@@ -1,0 +1,57 @@
+/* abril-fatface-regular - latin */
+@font-face {
+    font-family: 'Abril Fatface';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Abril Fatface'), local('AbrilFatface-Regular'),
+    url('fonts/abril-fatface-v11-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('fonts/abril-fatface-v11-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: antiquewhite;
+    font-size: 10vw;
+    font-family: 'Abril Fatface', sans-serif;
+    text-shadow: black 2px 2px 2px;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2B2B2B url("img/dying-light.jpg") center 0/cover;
+}
+
+.clock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75vw;
+}
+
+.clock div:not(.semicolon) {
+    width: 20%;
+    text-align: center;
+}
+
+.dayText {
+    font-size: 3vw;
+}
+
+.hide {
+    display: none;
+}
