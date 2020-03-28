@@ -42,6 +42,9 @@ var clockMode = function () {
 
     initializeClock();
 };
+
+// clockMode();
+
 //----------------------timer-----------------------------//
 var timerMode = function (endtime) {
 
@@ -65,7 +68,7 @@ var timerMode = function (endtime) {
         function updateClock() {
             var t = getTimeRemaining(endtime);
 
-            days.innerHTML = (t.days).toString();
+            days.innerHTML = (t.days).toString() + " <sup>days</sup>";
             hours.innerHTML = ('0' + t.hours).slice(-2);
             minutes.innerHTML = ('0' + t.minutes).slice(-2);
             seconds.innerHTML = ('0' + t.seconds).slice(-2);

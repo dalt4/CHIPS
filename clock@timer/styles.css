@@ -48,7 +48,8 @@ body {
     text-align: center;
 }
 
-.dayText {
+.dayText,
+.days span sup {
     font-size: 3vw;
 }
 
