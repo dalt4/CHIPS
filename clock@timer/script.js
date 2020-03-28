@@ -1,11 +1,15 @@
-var clock = document.querySelector('.clock');
+var clock = document.querySelector('.clock'),
+    switchTimer = document.querySelector('.switch');
 var days = clock.querySelector('.days span'),
     hours = clock.querySelector('.hours span'),
     minutes = clock.querySelector('.minutes span'),
     seconds = clock.querySelector('.seconds span');
 firstSemicolon = clock.querySelector('.semicolon:nth-child(2)');
+var interval = '';
+var timeinterval = '';
+var deadline = "April 02 2020 10:00:00 GMT+0300";
 
-//-----------------Часы---------------------------------//
+//-----------------Clock---------------------------------//
 
 var clockMode = function () {
     var dayOfW = [
@@ -18,17 +22,16 @@ var clockMode = function () {
         'суббота'
     ];
     days.classList.add('dayText');
-    firstSemicolon.classList.add('hide');
 
     function initializeClock() {
-        function startTime(){
+        function startTime() {
 
             var tm = new Date();
             var d = tm.getDay();
             var h = tm.getHours().toString();
             var m = tm.getMinutes().toString();
-            var s=tm.getSeconds().toString();
-            var ms=tm.getMilliseconds().toString();
+            var s = tm.getSeconds().toString();
+            var ms = tm.getMilliseconds().toString();
 
             days.innerHTML = dayOfW[d];
             hours.innerHTML = ('0' + h).slice(-2);
@@ -37,13 +40,13 @@ var clockMode = function () {
         }
 
         startTime();
-        var interval = setInterval(startTime, 500);
+        interval = setInterval(startTime, 500);
     }
 
     initializeClock();
 };
 
-// clockMode();
+clockMode();
 
 //----------------------timer-----------------------------//
 var timerMode = function (endtime) {
@@ -68,7 +71,7 @@ var timerMode = function (endtime) {
         function updateClock() {
             var t = getTimeRemaining(endtime);
 
-            days.innerHTML = (t.days).toString() + " <sup>days</sup>";
+            t.days === 1 ? days.innerHTML = (t.days).toString() + " <sup>day</sup>" : days.innerHTML = (t.days).toString() + " <sup>days</sup>";
             hours.innerHTML = ('0' + t.hours).slice(-2);
             minutes.innerHTML = ('0' + t.minutes).slice(-2);
             seconds.innerHTML = ('0' + t.seconds).slice(-2);
@@ -79,11 +82,28 @@ var timerMode = function (endtime) {
         }
 
         updateClock();
-        var timeinterval = setInterval(updateClock, 1000);
+        timeinterval = setInterval(updateClock, 1000);
     }
+
     initializeTimer(endtime)
 };
 
 // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000); // for endless timer
-var deadline="April 02 2020 10:00:00 GMT+0300";
-timerMode(deadline);
+// var deadline = "April 02 2020 10:00:00 GMT+0300";
+// timerMode(deadline);
+
+//-------------------------switch----------------------------------//
+
+switchTimer.addEventListener('click', function () {
+    if (switchTimer.innerHTML === 'clock') {
+        switchTimer.innerHTML = 'timer';
+        days.classList.remove('dayText');
+        clearInterval(interval);
+        timerMode(deadline);
+    }
+    else {
+        switchTimer.innerHTML = 'clock';
+        clearInterval(timeinterval);
+        clockMode();
+    }
+});
