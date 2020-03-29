@@ -1,13 +1,15 @@
 var clock = document.querySelector('.clock'),
-    switchTimer = document.querySelector('.switch');
+    switchTimer = document.querySelector('.switch'),
+    wrapper = document.querySelector('.wrapper'),
+    mainTitle = document.querySelector('title');
+
 var days = clock.querySelector('.days span'),
     hours = clock.querySelector('.hours span'),
     minutes = clock.querySelector('.minutes span'),
-    seconds = clock.querySelector('.seconds span');
-firstSemicolon = clock.querySelector('.semicolon:nth-child(2)');
-var interval = '';
-var timeinterval = '';
-var deadline = "April 02 2020 10:00:00 GMT+0300";
+    seconds = clock.querySelector('.seconds span'),
+    interval,
+    timeinterval,
+    deadline = "April 02 2020 10:00:00 GMT+0300";
 
 //-----------------Clock---------------------------------//
 
@@ -21,6 +23,7 @@ var clockMode = function () {
         'пятница',
         'суббота'
     ];
+
     days.classList.add('dayText');
 
     function initializeClock() {
@@ -37,6 +40,7 @@ var clockMode = function () {
             hours.innerHTML = ('0' + h).slice(-2);
             minutes.innerHTML = ('0' + m).slice(-2);
             seconds.innerHTML = ('0' + s).slice(-2);
+            mainTitle.innerHTML = 'CLOCK ' + ('0' + h).slice(-2) + ':' + ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
         }
 
         startTime();
@@ -75,6 +79,7 @@ var timerMode = function (endtime) {
             hours.innerHTML = ('0' + t.hours).slice(-2);
             minutes.innerHTML = ('0' + t.minutes).slice(-2);
             seconds.innerHTML = ('0' + t.seconds).slice(-2);
+            mainTitle.innerHTML = 'CLOCK ' + ('0' + t.days).slice(-2)  + 'd ' + ('0' + t.hours).slice(-2) + ':' + ('0' + t.minutes).slice(-2) + ':' + ('0' + t.seconds).slice(-2);
 
             if (t.total <= 0) {
                 clearInterval(timeinterval);
@@ -87,10 +92,6 @@ var timerMode = function (endtime) {
 
     initializeTimer(endtime)
 };
-
-// var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000); // for endless timer
-// var deadline = "April 02 2020 10:00:00 GMT+0300";
-// timerMode(deadline);
 
 //-------------------------switch----------------------------------//
 
@@ -107,3 +108,8 @@ switchTimer.addEventListener('click', function () {
         clockMode();
     }
 });
+
+if ((wrapper.clientWidth - wrapper.clientHeight) < 0) {
+    switchTimer.classList.add('x2');
+    clock.classList.add('vertical')
+}

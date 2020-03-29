@@ -40,7 +40,7 @@ body {
 .switch {
     width: 10vw;
     height: 3vw;
-    background: rgba(0, 0, 0, .4);
+    background: rgba(0, 0, 0, .7);
     position: absolute;
     top: 0;
     left: 50%;
@@ -50,7 +50,7 @@ body {
     font-size: 2vw;
     text-align: center;
     cursor: pointer;
-    box-shadow: 15px 15px 15px black;
+    box-shadow: 15px 15px 55px black;
     transition: .1s linear;
     text-transform: uppercase;
     user-select: none;
@@ -61,8 +61,6 @@ body {
 .switch:focus {
     box-shadow: 5px 5px 15px black;
 }
-
-
 
 .clock {
     display: flex;
@@ -77,8 +75,34 @@ body {
 }
 
 .dayText,
-.days span sup {
-    font-size: 3vw;
+ .days span sup {
+     font-size: 3vw;
+ }
+
+.clock.vertical {
+    flex-direction: column;
+    height: 75vh;
+    font-size: 20vw;
+}
+
+.clock.vertical div:not(.semicolon) {
+    width: 100%;
+    text-align: center;
+}
+
+.clock.vertical .semicolon {
+    display: none;
+}
+
+.clock.vertical .dayText,
+.clock.vertical .days span sup {
+    font-size: 7vw;
+}
+
+
+.x2 {
+    top: 20px;
+    transform:translateX(-50%) scale(2);
 }
 
 .hide {
