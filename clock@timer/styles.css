@@ -38,7 +38,8 @@ body {
 }
 
 .switch {
-    width: 10vw;
+    width: auto;
+    padding: 0 10px;
     height: 3vw;
     background: rgba(0, 0, 0, .7);
     position: absolute;
