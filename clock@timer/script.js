@@ -62,8 +62,6 @@ var clockMode = function () {
 
 clockMode();
 
-
-
 //-------------------------switch----------------------------------//
 
 switchTimer.addEventListener('click', function () {
@@ -71,7 +69,7 @@ switchTimer.addEventListener('click', function () {
         switchTimer.innerHTML = 'countdown';
         days.classList.remove('dayText');
         clearInterval(interval);
-        countdownMode(deadline, 0);
+        countdownMode(deadline, 0)
     }
     else if  (switchTimer.innerHTML === 'countdown') {
         switchTimer.innerHTML = 'timer';
@@ -91,6 +89,9 @@ switchTimer.addEventListener('click', function () {
 var settings_ico = document.querySelector('.settings-ico');
 var settings = document.querySelector('.settings');
 var submit = settings.querySelector('.submit'),
+    inputDays = settings.querySelector('.days'),
+    inputHours = settings.querySelector('.hours'),
+    inputMinutes = settings.querySelector('.minutes'),
     closeButton = settings.querySelector('.closeButton');
 
 settings_ico.addEventListener('click', function () {
@@ -101,26 +102,60 @@ closeButton.addEventListener('click', function () {
     settings.classList.remove('active')
 });
 
-submit.addEventListener('click', function (e) {
-    e.preventDefault();
+//--------------------------------validation------------------------------------//
 
-    timerDays = settings.querySelector('.days').value;
-    timerHours = settings.querySelector('.hours').value;
-    timerMinutes = settings.querySelector('.minutes').value;
-    settings.querySelector('.days').value = '';
-    settings.querySelector('.hours').value = '';
-    settings.querySelector('.minutes').value = '';
-    timerValue = (timerDays * 86400000) + (timerHours * 3600000) + (timerMinutes * 60000);
-    localStorage.setItem('timerValue', timerValue.toString());
-    deadline = (Date.now() + timerValue);
-    deadline = new Date(deadline);
-    localStorage.setItem('deadline', deadline.toString());
-    switchTimer.innerHTML = 'countdown';
-    days.classList.remove('dayText');
-    settings.classList.remove('active');
-    clearInterval(timeinterval);
-    clearInterval(interval);
-    countdownMode(deadline, 0);
+submit.addEventListener('click', function () {
+    var valid = 1;
+    if (inputDays.validity.patternMismatch) {
+        valid = 0;
+        inputDays.style.background = 'red';
+        inputDays.setCustomValidity('only numbers(0 - 999)')
+    } else {
+        inputDays.style.background = 'white';
+        inputDays.setCustomValidity('')
+    }
+    if (inputHours.validity.patternMismatch) {
+        valid = 0;
+        inputHours.style.background = 'red';
+        inputHours.setCustomValidity('only numbers(0 - 999)')
+    } else {
+        inputHours.style.background = 'white';
+        inputHours.setCustomValidity('')
+    }
+    if (inputMinutes.validity.patternMismatch) {
+        valid = 0;
+        inputMinutes.style.background = 'red';
+        inputMinutes.setCustomValidity('only numbers(0 - 999)')
+    } else {
+        inputMinutes.style.background = 'white';
+        inputMinutes.setCustomValidity('')
+    }
+    console.log(valid);
+    if (valid === 1) {
+        timerDays = settings.querySelector('.days').value;
+        timerHours = settings.querySelector('.hours').value;
+        timerMinutes = settings.querySelector('.minutes').value;
+        settings.querySelector('.days').value = '';
+        settings.querySelector('.hours').value = '';
+        settings.querySelector('.minutes').value = '';
+        timerValue = (timerDays * 86400000) + (timerHours * 3600000) + (timerMinutes * 60000);
+        if (timerValue !== null) {
+            var stop = 0;
+            localStorage.setItem('stop', stop.toString());
+        }
+        localStorage.setItem('timerValue', timerValue.toString());
+        deadline = (Date.now() + timerValue);
+        deadline = new Date(deadline);
+        localStorage.setItem('deadline', deadline.toString());
+        switchTimer.innerHTML = 'countdown';
+        days.classList.remove('dayText');
+        settings.classList.remove('active');
+        clearInterval(timeinterval);
+        clearInterval(interval);
+        if (timerValue !== null) {
+            countdownMode(deadline, 0);
+        }
+    }
 });
 
 //-----------------------resize-------------------------------//
@@ -176,14 +211,16 @@ var countdownMode = function (endtime, timer) {
             }
 
             var t = getTimeRemaining(endtime, timer);
-            timerValue === null ? days.innerHTML = '0 <sup>days</sup>': t.days === 1 ? days.innerHTML = (t.days).toString() + " <sup>day</sup>" : days.innerHTML = (t.days).toString() + " <sup>days</sup>";
-            hours.innerHTML = timerValue === null ? '0 0' : ('0' + t.hours).slice(-2);
-            minutes.innerHTML = timerValue === null ? '0 0' : ('0' + t.minutes).slice(-2);
-            seconds.innerHTML = timerValue === null ? '0 0' : ('0' + t.seconds).slice(-2);
+            localStorage.getItem('stop') === '1' ? days.innerHTML = '0 <sup>days</sup>': t.days === 1 ? days.innerHTML = (t.days).toString() + " <sup>day</sup>" : days.innerHTML = (t.days).toString() + " <sup>days</sup>";
+            hours.innerHTML = localStorage.getItem('stop') === '1' ? '0 0' : ('0' + t.hours).slice(-2);
+            minutes.innerHTML = localStorage.getItem('stop') === '1' ? '0 0' : ('0' + t.minutes).slice(-2);
+            seconds.innerHTML = localStorage.getItem('stop') === '1' ? '0 0' : ('0' + t.seconds).slice(-2);
             mainTitle.innerHTML = 'TIMER ' + ('0' + t.days).slice(-2)  + 'd ' + ('0' + t.hours).slice(-2) + ':' + ('0' + t.minutes).slice(-2) + ':' + ('0' + t.seconds).slice(-2);
 
-            if (t.total <= 0 || t.total === timerValue) {
+            if (t.total <= 0 || timerValue === null) {
                 clearInterval(timeinterval);
+                var stop = 1;
+                localStorage.setItem('stop', stop.toString())
             }
         }
 
