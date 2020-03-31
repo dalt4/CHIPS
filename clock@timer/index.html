@@ -11,6 +11,26 @@
 <body>
 <div class="wrapper">
     <div class="switch">clock</div>
+    <div class="settings-ico"></div>
+    <div class="settings">
+        <form action="#" class="settings__form">
+            <div class="closeButton"></div>
+            <p class="form-title">TIMER SETTINGS</p>
+            <label>
+                <span>days</span><br/>
+                <input type="text" class="days" placeholder="0"  required pattern="^[ 0-9]+$">
+            </label>
+            <label>
+                <span>hours</span><br/>
+                <input  type="text" class="hours" placeholder="0">
+            </label>
+            <label >
+                <span>minutes</span><br/>
+                <input type="text" class="minutes" placeholder="0">
+            </label>
+            <button type="submit" class="submit">SET</button>
+        </form>
+    </div>
     <div class="clock">
         <div class="days"><span>4</span></div>
         <div class="hours"><span>23</span></div>

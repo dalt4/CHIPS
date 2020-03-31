@@ -18,7 +18,7 @@ body {
     margin: 0;
     padding: 0;
     color: antiquewhite;
-    font-size: 10vw;
+    font-size: 8vw;
     font-family: 'Abril Fatface', sans-serif;
     text-shadow: black 2px 2px 2px;
 }
@@ -34,7 +34,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #2B2B2B url("img/dying-light.jpg") center 0/cover;
+    background: black url("img/arni.jpg") no-repeat center /auto 100%;
+    /*background: #2B2B2B ;*/
 }
 
 .switch {
@@ -63,8 +64,104 @@ body {
     box-shadow: 5px 5px 15px black;
 }
 
+.settings-ico {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: url("img/cogwheel-145804.svg") no-repeat center/cover;
+}
+
+.settings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.5);
+    padding: 10vh 10vw;
+    transform: scale(0);
+    transition: .2s;
+    z-index: 10;
+}
+
+.settings.active {
+    transform: scale(1);
+}
+
+.settings__form {
+    position: relative;
+    font-size: 4vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: black;
+    text-align: center;
+    padding: 40px;
+}
+
+.settings__form .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: url("img/cancel-297783.svg") no-repeat center/cover;
+    transition: .2s linear;
+}
+
+.settings__form .closeButton:hover {
+    transform: rotateZ(90deg);
+}
+
+.form-title {
+    margin: 0 4vw;
+    width: 100%;
+}
+
+.settings__form label {
+    width: 33%;
+    font-size: 2vw;
+}
+
+.settings__form input {
+    display: inline-block;
+    width: 8vw;
+    height: 5vw;
+    margin: 0 3vw 3vw;
+}
+
+.settings__form input,
+.settings__form button {
+    text-align: center;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.settings__form button {
+    padding: 0 1vw;
+    justify-self: center;
+    display: block;
+    background: antiquewhite;
+}
+
+.settings__form button:focus,
+.settings__form button:hover,
+.settings__form button:active {
+    box-shadow: silver 0 0 10px;
+}
+
 .clock {
     display: flex;
+    transform: scaleY(1.5);
     justify-content: space-between;
     align-items: center;
     width: 75vw;
@@ -81,6 +178,7 @@ body {
  }
 
 .clock.vertical {
+    transform: scaleY(1);
     flex-direction: column;
     height: 75vh;
     font-size: 20vw;
@@ -100,10 +198,14 @@ body {
     font-size: 7vw;
 }
 
-
-.x2 {
+.switch.x2 {
     top: 20px;
     transform:translateX(-50%) scale(2);
+}
+
+label.x2,
+.submit.x2 {
+    transform: scale(2);
 }
 
 .hide {
