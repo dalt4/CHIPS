@@ -34,7 +34,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: black url("img/arni.jpg") no-repeat center /auto 100%;
+    background: black url("img/dying-light.jpg") no-repeat center 0 /cover;
     /*background: #2B2B2B ;*/
 }
 
