@@ -68,10 +68,30 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     cursor: pointer;
     background: url("img/cogwheel-145804.svg") no-repeat center/cover;
+    filter: drop-shadow(0 0 5px black) contrast(2);
+    transition: .4s ease-out all;
+    transform-origin: 35% 35%;
+}
+
+.settings-ico.anim {
+    animation: anim .4s ease-in-out infinite alternate;
+}
+
+@keyframes anim {
+    from{
+        filter: drop-shadow(0 0 5px black) contrast(1);
+    }
+    to {
+        filter: drop-shadow(0 0 5px black) contrast(3);
+    }
+}
+
+.settings-ico:hover {
+    transform: rotateZ(270deg);
 }
 
 .settings {

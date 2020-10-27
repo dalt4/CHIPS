@@ -95,7 +95,8 @@ var submit = settings.querySelector('.submit'),
     closeButton = settings.querySelector('.closeButton');
 
 settings_ico.addEventListener('click', function () {
-    settings.classList.add('active')
+    settings.classList.add('active');
+    settings_ico.classList.remove('anim')
 });
 
 closeButton.addEventListener('click', function () {

@@ -1,0 +1,44 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.triangl {
+    width: 200px;
+    height: 600px;
+    position: relative;
+    animation: rotate 25s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateY(0deg);
+    }
+    25% {
+        transform: rotateY(45deg);
+    }
+    75% {
+        transform: rotateY(-45deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+.dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: black;
+    border-radius: 50%;
+    transition: 2s all linear;
+}
+
